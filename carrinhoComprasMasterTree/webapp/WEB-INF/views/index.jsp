@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
  
-<title>Books Shop Online</title>
+<title>Loja de livros online</title>
  
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css">
  
@@ -16,15 +16,15 @@
    <jsp:include page="_header.jsp" />
    <jsp:include page="_menu.jsp" />
  
-   <div class="page-title">Shopping Cart Demo</div>
+   <div class="page-title">Carrinho de Compras Demo</div>
   
    <div class="demo-container">
    <h3>Demo content</h3>
   
    <ul>
-      <li>Buy online</li>
-      <li>Admin pages</li>
-      <li>Reports</li>
+      <li>Venda online</li>
+      <li>Páginas de administração</li>
+      <li>Relatórios</li>
    </ul>
    </div>
   
