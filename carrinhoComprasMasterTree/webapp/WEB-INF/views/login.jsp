@@ -20,11 +20,11 @@
  
  
  
-   <div class="page-title">Login (For Employee, Manager)</div>
+   <div class="page-title">Login (Para Funcionário, Gerente)</div>
  
    <div class="login-container">
  
-       <h3>Enter username and password</h3>
+       <h3>Digite o nome de usuário e a senha</h3>
        <br>
        <!-- /login?error=true -->
        <c:if test="${param.error == 'true'}">
@@ -40,12 +40,12 @@
            action="${pageContext.request.contextPath}/j_spring_security_check">
            <table>
                <tr>
-                   <td>User Name *</td>
+                   <td>Nome de Usuário *</td>
                    <td><input name="userName" /></td>
                </tr>
  
                <tr>
-                   <td>Password *</td>
+                   <td>Senha *</td>
                    <td><input type="password" name="password" /></td>
                </tr>
  

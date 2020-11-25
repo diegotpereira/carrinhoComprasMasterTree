@@ -8,12 +8,12 @@
   
    <a href="${pageContext.request.contextPath}/">Home</a>
    |
-   <a href="${pageContext.request.contextPath}/productList">
-      Product List
+   <a href="${pageContext.request.contextPath}/listaProduto">
+      Lista de Produtos
    </a>
    |
-   <a href="${pageContext.request.contextPath}/shoppingCart">
-      My Cart
+   <a href="${pageContext.request.contextPath}/carrinhoCompras">
+      Meu Carrinho
    </a>
    |
    <security:authorize  access="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
@@ -24,7 +24,7 @@
    </security:authorize>
    
    <security:authorize  access="hasRole('ROLE_MANAGER')">
-         <a href="${pageContext.request.contextPath}/product">
+         <a href="${pageContext.request.contextPath}/produto">
                         Create Product
          </a>
          |
