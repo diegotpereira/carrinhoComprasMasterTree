@@ -1,4 +1,4 @@
-package br.com.java.model;
+package br.com.java.entity;
 
 import java.io.Serializable;
 import java.util.Date;
