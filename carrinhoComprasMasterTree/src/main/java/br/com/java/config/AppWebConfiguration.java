@@ -24,7 +24,7 @@ import br.com.java.dao.ContaDAOImpl;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "br.com.java")
+@ComponentScan ({ "br.com.java","br.com.java.dao", "br.com.java.authentication.MyDBAuthenticationService" })
 @PropertySource("classpath:ds-hibernate-cfg.properties")
 public class AppWebConfiguration {
 	

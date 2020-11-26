@@ -2,6 +2,8 @@ package br.com.java.controller;
 
 import javax.transaction.Transactional;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,18 @@ public class AdminController {
     public String login(Model model) {
  
         return "login";
+    }
+    
+    @RequestMapping(value = { "/accountInfo" }, method = RequestMethod.GET)
+    public String accountInfo(Model model) {
+ 
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(userDetails.getPassword());
+        System.out.println(userDetails.getUsername());
+        System.out.println(userDetails.isEnabled());
+ 
+        model.addAttribute("userDetails", userDetails);
+        return "accountInfo";
     }
 	
 	  // GET: Show product.

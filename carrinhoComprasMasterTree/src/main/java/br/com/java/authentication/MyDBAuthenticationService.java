@@ -42,13 +42,13 @@ public class MyDBAuthenticationService implements UserDetailsService {
 		grantList.add(authority);
 
 		boolean enabled = conta.isActive();
-		boolean accountNonExpired = true;
+		boolean contaNonExpired = true;
 		boolean credentialsNonExpired = true;
-		boolean accountNonLocked = true;
+		boolean contaNonLocked = true;
 
 		UserDetails userDetails = (UserDetails) new User(conta.getUserName(), //
-				conta.getPassword(), enabled, accountNonExpired, //
-				credentialsNonExpired, accountNonLocked, grantList);
+				conta.getPassword(), enabled, contaNonExpired, //
+				credentialsNonExpired, contaNonLocked, grantList);
 
 		return userDetails;
 	}

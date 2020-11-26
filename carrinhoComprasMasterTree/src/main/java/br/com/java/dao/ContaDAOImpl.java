@@ -16,26 +16,41 @@ public class ContaDAOImpl implements ContaDAO {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+//	protected Session getCurrentSession() {
+//        return sessionFactory.getCurrentSession();
+//    }
 
 	@Override
 	public Conta descConta(String userName) {
 		// TODO Auto-generated method stub
-		Session session = sessionFactory.getCurrentSession();
+		Session session;// = sessionFactory.getCurrentSession();
+		
+		try 
+		{
+		    //Step-2: Implementation
+		    session = sessionFactory.getCurrentSession();
+		} 
+		catch (HibernateException e) 
+		{
+		    //Step-3: Implementation
+		    session = sessionFactory.openSession();
+		}
 		Criteria crit = session.createCriteria(Conta.class);
 		crit.add(Restrictions.eq("userName", userName));
 		return (Conta) crit.uniqueResult();
 	}
 
-	@Override
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		// TODO Auto-generated method stub
-		Session session;
-
-		try {
-		    session = sessionFactory.getCurrentSession();
-		} catch (HibernateException e) {
-		    session = sessionFactory.openSession();
-		}
-	}
+//	@Override
+//	public void setSessionFactory(SessionFactory sessionFactory) {
+//		// TODO Auto-generated method stub
+//		Session session;
+//
+//		try {
+//		    session = sessionFactory.getCurrentSession();
+//		} catch (HibernateException e) {
+//		    session = sessionFactory.openSession();
+//		}
+//	}
 
 }
