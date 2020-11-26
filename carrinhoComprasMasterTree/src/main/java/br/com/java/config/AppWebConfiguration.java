@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
@@ -23,6 +25,7 @@ import br.com.java.dao.ContaDAOImpl;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "br.com.java")
+@PropertySource("classpath:ds-hibernate-cfg.properties")
 public class AppWebConfiguration {
 	
 	@Autowired
@@ -38,9 +41,26 @@ public class AppWebConfiguration {
 		return viewResolver;
 	}
 	
+	 @Bean(name = "dataSource")
+	    public DataSource getDataSource() {
+	        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+	 
+	        // See: ds-hibernate-cfg.properties
+	        dataSource.setDriverClassName(env.getProperty("ds.database-driver"));
+	        dataSource.setUrl(env.getProperty("ds.url"));
+	        dataSource.setUsername(env.getProperty("ds.username"));
+	        dataSource.setPassword(env.getProperty("ds.password"));
+	         
+	        System.out.println("## getDataSource: " + dataSource);
+	         
+	        return dataSource;
+	    }
+	
 	@Autowired
     @Bean(name = "sessionFactory")
     public SessionFactory getSessionFactory(DataSource dataSource) throws Exception {
+		
+		
         Properties properties = new Properties();
  
         // See: ds-hibernate-cfg.properties

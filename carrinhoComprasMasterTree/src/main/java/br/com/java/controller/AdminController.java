@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Controller
 //Enable Hibernate Transaction.
-@Transactional
+@Transactional 
 //Need to use RedirectAttributes
 @EnableWebMvc
 public class AdminController {
