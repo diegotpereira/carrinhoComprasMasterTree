@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.java.dao.ContaDAO;
 import br.com.java.entity.Conta;
+
 @Service
 public class MyDBAuthenticationService implements UserDetailsService {
 	
@@ -22,7 +23,7 @@ public class MyDBAuthenticationService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Conta account = dao.findAccount(username);
+		Conta account = dao.descConta(username);
 		System.out.println("Account= " + account);
 
 		if (account == null) {
