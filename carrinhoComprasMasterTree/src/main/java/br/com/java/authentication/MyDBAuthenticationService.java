@@ -23,16 +23,16 @@ public class MyDBAuthenticationService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Conta account = dao.descConta(username);
-		System.out.println("Account= " + account);
+		Conta conta = dao.descConta(username);
+		System.out.println("Conta= " + conta);
 
-		if (account == null) {
+		if (conta == null) {
 			throw new UsernameNotFoundException("User " //
 					+ username + " was not found in the database");
 		}
 
 		// EMPLOYEE,MANAGER,..
-		String role = account.getUserRole();
+		String role = conta.getUserRole();
 
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
 
@@ -41,13 +41,13 @@ public class MyDBAuthenticationService implements UserDetailsService {
 
 		grantList.add(authority);
 
-		boolean enabled = account.isActive();
+		boolean enabled = conta.isActive();
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
-		UserDetails userDetails = (UserDetails) new User(account.getUserName(), //
-				account.getPassword(), enabled, accountNonExpired, //
+		UserDetails userDetails = (UserDetails) new User(conta.getUserName(), //
+				conta.getPassword(), enabled, accountNonExpired, //
 				credentialsNonExpired, accountNonLocked, grantList);
 
 		return userDetails;
