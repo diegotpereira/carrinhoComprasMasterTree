@@ -18,11 +18,11 @@ import br.com.java.entity.Conta;
 public class MyDBAuthenticationService implements UserDetailsService {
 	
 	@Autowired
-	private ContaDAO accountDAO;
+	private ContaDAO dao;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Conta account = ContaDAO.findAccount(username);
+		Conta account = dao.findAccount(username);
 		System.out.println("Account= " + account);
 
 		if (account == null) {

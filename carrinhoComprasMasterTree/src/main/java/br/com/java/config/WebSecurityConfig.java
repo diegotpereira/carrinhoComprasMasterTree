@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import br.com.java.authentication.MyDBAuthenticationService;
 
 @Configuration
-//@EnableWebSecurity = @EnableWebMVCSecurity + Extra features
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
@@ -37,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.access("hasAnyRole('ROLE_EMPLOYEE', 'ROLE_MANAGER')");
 
 		// For MANAGER only.
-		http.authorizeRequests().antMatchers("/product").access("hasRole('ROLE_MANAGER')");
+		http.authorizeRequests().antMatchers("/produto").access("hasRole('ROLE_MANAGER')");
 
 		// When the user has logged in as XX.
 		// But access a page that requires role YY,
