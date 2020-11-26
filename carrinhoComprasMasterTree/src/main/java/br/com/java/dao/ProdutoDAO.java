@@ -1,6 +1,7 @@
 package br.com.java.dao;
 
 import br.com.java.entity.Produto;
+import br.com.java.model.PaginationResult;
 import br.com.java.model.ProdutoInfo;
 
 public interface ProdutoDAO {

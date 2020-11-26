@@ -2,6 +2,8 @@ package br.com.java.model;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import br.com.java.entity.Produto;
+
 public class ProdutoInfo {
 	
 	private String codigo;
@@ -13,7 +15,22 @@ public class ProdutoInfo {
     // Upload file.
     private CommonsMultipartFile fileData;
     
-    public ProdutoInfo() {}
+	public ProdutoInfo() {
+    }
+
+	public ProdutoInfo(Produto produto) {
+        this.codigo = produto.getCodigo();
+        this.nome = produto.getNome();
+        this.preco = produto.getPreco();
+    }
+
+	// Không thay đổi Constructor này,
+	// nó được sử dụng trong Hibernate query.
+	public ProdutoInfo(String codigo, String nome, double preco) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.preco = preco;
+    }
 
 	public String getCodigo() {
 		return codigo;
