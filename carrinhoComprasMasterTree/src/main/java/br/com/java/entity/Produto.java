@@ -65,7 +65,7 @@ public class Produto implements Serializable{
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "criarData", nullable = false)
+    @Column(name = "criar_Data", nullable = false)
 	public Date getCriarData() {
 		return criarData;
 	}

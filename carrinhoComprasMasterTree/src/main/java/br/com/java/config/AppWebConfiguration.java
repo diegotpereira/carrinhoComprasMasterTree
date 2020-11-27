@@ -14,6 +14,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -41,6 +42,17 @@ public class AppWebConfiguration {
 		viewResolver.setSuffix(".jsp");
 
 		return viewResolver;
+	}
+	
+	// Configuração para Upload.
+	@Bean(name = "multipartResolver")
+	public CommonsMultipartResolver multipartResolver() {
+		CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+
+		// Set Max Size...
+		// commonsMultipartResolver.setMaxUploadSize(...);
+
+		return commonsMultipartResolver;
 	}
 	
 	 @Bean(name = "dataSource")

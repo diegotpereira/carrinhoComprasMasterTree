@@ -3,6 +3,7 @@ package br.com.java.dao;
 import java.util.Date;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -22,7 +23,15 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
 	@Override
 	public Produto descProduto(String codigo) {
-		Session session = sessionFactory.getCurrentSession();
+		Session session;// = sessionFactory.getCurrentSession();
+
+		try {
+			// Step-2: Implementation
+			session = sessionFactory.getCurrentSession();
+		} catch (HibernateException e) {
+			// Step-3: Implementation
+			session = sessionFactory.openSession();
+		}
 		Criteria crit = session.createCriteria(Produto.class);
 		crit.add(Restrictions.eq("codigo", codigo));
 		return (Produto) crit.uniqueResult();
