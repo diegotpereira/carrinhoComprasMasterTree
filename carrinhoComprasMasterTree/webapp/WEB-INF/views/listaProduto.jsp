@@ -39,7 +39,7 @@
                <!-- For Manager edit Product -->
                <security:authorize  access="hasRole('ROLE_MANAGER')">
                  <li><a style="color:red;"
-                     href="${pageContext.request.contextPath}/produto?codigo=${prodInfo.code}">
+                     href="${pageContext.request.contextPath}/produto?codigo=${prodInfo.codigo}">
                        Edit Product</a></li>
                </security:authorize>
            </ul>
