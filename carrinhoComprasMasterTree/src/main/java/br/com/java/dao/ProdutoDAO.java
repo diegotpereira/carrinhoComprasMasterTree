@@ -6,14 +6,14 @@ import br.com.java.model.ProdutoInfo;
 
 public interface ProdutoDAO {
 	
-	public Produto findProduct(String codigo);
+	public Produto descProduto(String codigo);
 
-	public ProdutoInfo findProductInfo(String codigo);
+	public ProdutoInfo descProdutoInfo(String codigo);
 
 	public PaginationResult<ProdutoInfo> queryProducts(int page, int maxResult, int maxNavigationPage);
 
 	public PaginationResult<ProdutoInfo> queryProducts(int page, int maxResult, int maxNavigationPage, String likeName);
 
-	public void save(ProdutoInfo productInfo);
+	public void salvar(ProdutoInfo produtoInfo);
 
 }

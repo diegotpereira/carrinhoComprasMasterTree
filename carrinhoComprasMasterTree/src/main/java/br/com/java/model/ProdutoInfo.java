@@ -10,7 +10,7 @@ public class ProdutoInfo {
     private String nome;
     private double preco;
     
-    private boolean novoProdut0=false;
+    private boolean novoProduto=false;
     
     // Upload file.
     private CommonsMultipartFile fileData;
@@ -56,12 +56,12 @@ public class ProdutoInfo {
 		this.preco = preco;
 	}
 
-	public boolean isNovoProdut0() {
-		return novoProdut0;
+	public boolean isNovoProduto() {
+		return novoProduto;
 	}
 
-	public void setNovoProdut0(boolean novoProdut0) {
-		this.novoProdut0 = novoProdut0;
+	public void setNovoProduto(boolean novoProduto) {
+		this.novoProduto = novoProduto;
 	}
 
 	public CommonsMultipartFile getFileData() {

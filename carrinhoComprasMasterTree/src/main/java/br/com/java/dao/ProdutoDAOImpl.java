@@ -21,16 +21,16 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 	private SessionFactory sessionFactory;
 
 	@Override
-	public Produto findProduct(String code) {
+	public Produto descProduto(String codigo) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria crit = session.createCriteria(Produto.class);
-		crit.add(Restrictions.eq("code", code));
+		crit.add(Restrictions.eq("codigo", codigo));
 		return (Produto) crit.uniqueResult();
 	}
 
 	@Override
-	public ProdutoInfo findProductInfo(String codigo) {
-		Produto produto = this.findProduct(codigo);
+	public ProdutoInfo descProdutoInfo(String codigo) {
+		Produto produto = this.descProduto(codigo);
 		if (produto == null) {
 			return null;
 		}
@@ -38,14 +38,14 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 	}
 
 	@Override
-	public void save(ProdutoInfo produtoInfo) {
+	public void salvar(ProdutoInfo produtoInfo) {
 		String codigo = produtoInfo.getCodigo();
 
 		Produto produto = null;
 
 		boolean isNew = false;
 		if (codigo != null) {
-			produto = this.findProduct(codigo);
+			produto = this.descProduto(codigo);
 		}
 		if (produto == null) {
 			isNew = true;
@@ -74,10 +74,10 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 	public PaginationResult<ProdutoInfo> queryProducts(int page, int maxResult, int maxNavigationPage,
 			String likeName) {
 		String sql = "Select new " + ProdutoInfo.class.getName() //
-				+ "(p.code, p.name, p.price) " + " from "//
+				+ "(p.codigo, p.nome, p.preco) " + " from "//
 				+ Produto.class.getName() + " p ";
 		if (likeName != null && likeName.length() > 0) {
-			sql += " Where lower(p.name) like :likeName ";
+			sql += " Where lower(p.nome) like :likeName ";
 		}
 		sql += " order by p.createDate desc ";
 		//
