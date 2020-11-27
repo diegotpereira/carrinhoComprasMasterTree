@@ -30,6 +30,7 @@ public class MainController {
 	
 	@Autowired
     private ProdutoDAO produtoDAO;
+	
 
 	@RequestMapping("/")
 	public String home() {

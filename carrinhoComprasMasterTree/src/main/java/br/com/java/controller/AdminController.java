@@ -3,6 +3,7 @@ package br.com.java.controller;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -10,15 +11,19 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.java.dao.ProdutoDAO;
 import br.com.java.model.ProdutoInfo;
+import br.com.java.validator.ProdutoInfoValidator;
 
 @Controller
 //Enable Hibernate Transaction.
@@ -29,6 +34,28 @@ public class AdminController {
 	
 	@Autowired
 	private ProdutoDAO produtoDAO;
+	
+	@Autowired
+	private ProdutoInfoValidator produtoInfoValidator;
+	
+	// Configurated In ApplicationContextConfig.
+    @Autowired
+    private ResourceBundleMessageSource messageSource;
+ 
+	@InitBinder
+	public void myInitBinder(WebDataBinder dataBinder) {
+		Object target = dataBinder.getTarget();
+		if (target == null) {
+			return;
+		}
+		System.out.println("Target=" + target);
+
+		if (target.getClass() == ProdutoInfo.class) {
+			dataBinder.setValidator(produtoInfoValidator);
+			// For upload Image.
+			dataBinder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+		}
+	}
 	
 	 // GET: Show Login Page
     @RequestMapping(value = { "/login" }, method = RequestMethod.GET)

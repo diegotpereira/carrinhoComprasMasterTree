@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -33,6 +34,14 @@ public class AppWebConfiguration {
 	
 	@Autowired
 	private Environment env;
+	
+	@Bean
+	public ResourceBundleMessageSource messageSource() {
+		ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
+		// Load property in message/validator.properties
+		rb.setBasenames(new String[] { "messages/validator" });
+		return rb;
+	}
 	
 	@Bean(name="AppWeb")
 	public ViewResolver viewResolver() {
