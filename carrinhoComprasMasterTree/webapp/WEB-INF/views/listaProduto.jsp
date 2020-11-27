@@ -32,7 +32,7 @@
                    src="${pageContext.request.contextPath}/produtoImage?codigo=${prodInfo.codigo}" /></li>
                <li>Code: ${prodInfo.codigo}</li>
                <li>Name: ${prodInfo.nome}</li>
-               <li>Price: <fmt:formatNumber value="${prodInfo.price}" type="currency"/></li>
+               <li>Price: <fmt:formatNumber value="${prodInfo.preco}" type="currency"/></li>
                <li><a
                    href="${pageContext.request.contextPath}/buyProduct?codigo=${prodInfo.codigo}">
                        Buy Now</a></li>
@@ -53,7 +53,7 @@
        <div class="page-navigator">
           <c:forEach items="${paginationProducts.navigationPages}" var = "page">
               <c:if test="${page != -1 }">
-                <a href="productList?page=${page}" class="nav-item">${page}</a>
+                <a href="listaProduto?page=${page}" class="nav-item">${page}</a>
               </c:if>
               <c:if test="${page == -1 }">
                 <span class="nav-item"> ... </span>

@@ -58,11 +58,11 @@
                <img src="${pageContext.request.contextPath}/produtoImage?codigo=${produtoForm.codigo}" width="100"/></td>
                <td> </td>
            </tr>
-<!--            <tr> -->
-<!--                <td>Upload Image</td> -->
-<%--                <td><form:input type="file" path="fileData"/></td> --%>
-<!--                <td> </td> -->
-<!--            </tr> -->
+           <tr>
+               <td>Upload Image</td>
+               <td><form:input type="file" path="fileData"/></td>
+               <td> </td>
+           </tr>
  
  
            <tr>
