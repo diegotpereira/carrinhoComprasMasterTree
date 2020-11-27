@@ -21,6 +21,8 @@ import org.springframework.web.servlet.view.JstlView;
 
 import br.com.java.dao.ContaDAO;
 import br.com.java.dao.ContaDAOImpl;
+import br.com.java.dao.ProdutoDAO;
+import br.com.java.dao.ProdutoDAOImpl;
 
 @Configuration
 @EnableWebMvc
@@ -96,6 +98,10 @@ public class AppWebConfiguration {
 	@Bean(name = "dao")
     public ContaDAO getContaDAO()  {
         return new ContaDAOImpl();
+    }
+	@Bean(name = "produtoDAO")
+    public ProdutoDAO getProdutoDAO() {
+        return new ProdutoDAOImpl();
     }
 
 }

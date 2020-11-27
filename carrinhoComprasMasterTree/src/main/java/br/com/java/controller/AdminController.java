@@ -1,15 +1,24 @@
 package br.com.java.controller;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import br.com.java.dao.ProdutoDAO;
+import br.com.java.model.ProdutoInfo;
 
 @Controller
 //Enable Hibernate Transaction.
@@ -17,6 +26,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 //Need to use RedirectAttributes
 @EnableWebMvc
 public class AdminController {
+	
+	@Autowired
+	private ProdutoDAO produtoDAO;
 	
 	 // GET: Show Login Page
     @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
@@ -39,18 +51,42 @@ public class AdminController {
 	
 	  // GET: Show product.
     @RequestMapping(value = { "/produto" }, method = RequestMethod.GET)
-    public String produto(Model model, @RequestParam(value = "codigo", defaultValue = "") String code) {
-//        ProductInfo productInfo = null;
-// 
-//        if (code != null && code.length() > 0) {
-//            productInfo = productDAO.findProductInfo(code);
-//        }
-//        if (productInfo == null) {
-//            productInfo = new ProductInfo();
-//            productInfo.setNewProduct(true);
-//        }
-//        model.addAttribute("productForm", productInfo);
-        return "produto";
+    public String produto(Model model, @RequestParam(value = "codigo", defaultValue = "") String codigo) {
+		ProdutoInfo produtoInfo = null;
+
+		if (codigo != null && codigo.length() > 0) {
+			produtoInfo = produtoDAO.descProdutoInfo(codigo);
+		}
+		if (produtoInfo == null) {
+			produtoInfo = new ProdutoInfo();
+			produtoInfo.setNovoProduto(true);
+		}
+		model.addAttribute("produtoForm", produtoInfo);
+		return "produto";
+	}
+    // POST: Salvar produto
+    @RequestMapping(value = { "/produto" }, method = RequestMethod.POST)
+    // Avoid UnexpectedRollbackException (See more explanations)
+    @Transactional(propagation = Propagation.NEVER)
+    public String salvarProduto(Model model, //
+            @ModelAttribute("produtoForm") @Validated ProdutoInfo produtoInfo, //
+            BindingResult result, //
+            final RedirectAttributes redirectAttributes) {
+ 
+        if (result.hasErrors()) {
+            return "produto";
+        }
+        try {
+            produtoDAO.salvar(produtoInfo);
+        } catch (Exception e) {
+            // Need: Propagation.NEVER?
+            String message = e.getMessage();
+            model.addAttribute("message", message);
+            // Show product form.
+            return "produto";
+ 
+        }
+        return "redirect:/listaProduto";
     }
 
 }
