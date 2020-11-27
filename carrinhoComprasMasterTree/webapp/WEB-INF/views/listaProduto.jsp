@@ -29,17 +29,17 @@
        <div class="product-preview-container">
            <ul>
                <li><img class="product-image"
-                   src="${pageContext.request.contextPath}/productImage?code=${prodInfo.code}" /></li>
-               <li>Code: ${prodInfo.code}</li>
-               <li>Name: ${prodInfo.name}</li>
+                   src="${pageContext.request.contextPath}/produtoImage?codigo=${prodInfo.codigo}" /></li>
+               <li>Code: ${prodInfo.codigo}</li>
+               <li>Name: ${prodInfo.nome}</li>
                <li>Price: <fmt:formatNumber value="${prodInfo.price}" type="currency"/></li>
                <li><a
-                   href="${pageContext.request.contextPath}/buyProduct?code=${prodInfo.code}">
+                   href="${pageContext.request.contextPath}/buyProduct?codigo=${prodInfo.codigo}">
                        Buy Now</a></li>
                <!-- For Manager edit Product -->
                <security:authorize  access="hasRole('ROLE_MANAGER')">
                  <li><a style="color:red;"
-                     href="${pageContext.request.contextPath}/product?code=${prodInfo.code}">
+                     href="${pageContext.request.contextPath}/produto?codigo=${prodInfo.code}">
                        Edit Product</a></li>
                </security:authorize>
            </ul>

@@ -34,8 +34,8 @@
                        ${produtoForm.codigo}
                   </c:if>
                   <c:if test="${empty produtoForm.codigo}">
-<%--                        <form:input path="codigo" /> --%>
-<%--                        <form:hidden path="newProduct" /> --%>
+                       <form:input path="codigo" />
+                       <form:hidden path="novoProduto" />
                   </c:if>
                </td>
                <td><form:errors path="codigo" class="error-message" /></td>
@@ -43,13 +43,13 @@
  
            <tr>
                <td>Nome *</td>
-<%--                <td><form:input path="nome" /></td> --%>
+               <td><form:input path="nome" /></td>
                <td><form:errors path="nome" class="error-message" /></td>
            </tr>
  
            <tr>
                <td>Preço *</td>
-<%--                <td><form:input path="preco" /></td> --%>
+               <td><form:input path="preco" /></td>
                <td><form:errors path="preco" class="error-message" /></td>
            </tr>
            <tr>
@@ -58,11 +58,11 @@
                <img src="${pageContext.request.contextPath}/produtoImage?codigo=${produtoForm.codigo}" width="100"/></td>
                <td> </td>
            </tr>
-           <tr>
-               <td>Upload Image</td>
+<!--            <tr> -->
+<!--                <td>Upload Image</td> -->
 <%--                <td><form:input type="file" path="fileData"/></td> --%>
-               <td> </td>
-           </tr>
+<!--                <td> </td> -->
+<!--            </tr> -->
  
  
            <tr>
