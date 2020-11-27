@@ -88,9 +88,18 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 		if (likeName != null && likeName.length() > 0) {
 			sql += " Where lower(p.nome) like :likeName ";
 		}
-		sql += " order by p.createDate desc ";
+		sql += " order by p.criarData desc ";
 		//
-		Session session = sessionFactory.getCurrentSession();
+//		Session session = sessionFactory.getCurrentSession();
+		Session session;// = sessionFactory.getCurrentSession();
+
+		try {
+			// Step-2: Implementation
+			session = sessionFactory.getCurrentSession();
+		} catch (HibernateException e) {
+			// Step-3: Implementation
+			session = sessionFactory.openSession();
+		}
 
 		Query query = session.createQuery(sql);
 		if (likeName != null && likeName.length() > 0) {
