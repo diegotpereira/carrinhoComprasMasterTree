@@ -33,7 +33,7 @@ public class ProdutoInfo {
     }
 
 	public String getCodigo() {
-		return codigo;
+   		return codigo;
 	}
 
 	public void setCodigo(String codigo) {

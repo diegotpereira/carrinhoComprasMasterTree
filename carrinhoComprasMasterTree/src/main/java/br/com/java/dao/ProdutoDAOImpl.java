@@ -6,16 +6,19 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.java.entity.Produto;
 import br.com.java.model.PaginationResult;
 import br.com.java.model.ProdutoInfo;
 
-@Transactional
+@Transactional(readOnly=true)
+@Repository
 public class ProdutoDAOImpl implements ProdutoDAO{
 	
 	@Autowired
@@ -48,6 +51,8 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
 	@Override
 	public void salvar(ProdutoInfo produtoInfo) {
+		
+		
 		String codigo = produtoInfo.getCodigo();
 
 		Produto produto = null;
@@ -72,11 +77,25 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 			}
 		}
 		if (isNew) {
-			this.sessionFactory.getCurrentSession().persist(produto);
+			
+			@SuppressWarnings("deprecation")
+			Session session = sessionFactory.getSessionFactory().openSession();
+			Transaction transaction = null;
+			
+			try {
+				transaction = session.beginTransaction();
+				session.save(produto);
+				transaction.commit();
+				} catch (HibernateException e) {
+				transaction.rollback();
+				e.printStackTrace();
+				} finally {
+				session.close();
+		
+		
+				}
 		}
-		// If error in DB, Exceptions will be thrown out immediately
-		// Nếu có lỗi tại DB, ngoại lệ sẽ ném ra ngay lập tức
-		this.sessionFactory.getCurrentSession().flush();
+
 	}
 
 	@Override
