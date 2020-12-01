@@ -107,6 +107,7 @@ public class AdminController {
             produtoDAO.salvar(produtoInfo);
         } catch (Exception e) {
             // Need: Propagation.NEVER?
+        	System.out.println(e.getMessage());
             String message = e.getMessage();
             model.addAttribute("message", message);
             // Show product form.

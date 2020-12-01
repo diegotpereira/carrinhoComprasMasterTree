@@ -31,6 +31,10 @@ public class MainController {
 	@Autowired
     private ProdutoDAO produtoDAO;
 	
+	@RequestMapping("/403")
+	public String accessDenied() {
+		return "/403";
+	}
 
 	@RequestMapping("/")
 	public String home() {
