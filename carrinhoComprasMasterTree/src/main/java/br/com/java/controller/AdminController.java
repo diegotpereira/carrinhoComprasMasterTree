@@ -2,6 +2,10 @@ package br.com.java.controller;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +25,11 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.java.dao.PedidoDAO;
 import br.com.java.dao.ProdutoDAO;
+import br.com.java.model.PaginationResult;
+import br.com.java.model.PedidoDetalheInfo;
+import br.com.java.model.PedidoInfo;
 import br.com.java.model.ProdutoInfo;
 import br.com.java.validator.ProdutoInfoValidator;
 
@@ -31,6 +39,9 @@ import br.com.java.validator.ProdutoInfoValidator;
 //Need to use RedirectAttributes
 @EnableWebMvc
 public class AdminController {
+	
+	@Autowired
+	private PedidoDAO pedidoDAO;
 	
 	@Autowired
 	private ProdutoDAO produtoDAO;
@@ -64,8 +75,8 @@ public class AdminController {
         return "login";
     }
     
-    @RequestMapping(value = { "/accountInfo" }, method = RequestMethod.GET)
-    public String accountInfo(Model model) {
+    @RequestMapping(value = { "/contaInfo" }, method = RequestMethod.GET)
+    public String contaInfo(Model model) {
  
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(userDetails.getPassword());
@@ -73,7 +84,28 @@ public class AdminController {
         System.out.println(userDetails.isEnabled());
  
         model.addAttribute("userDetails", userDetails);
-        return "accountInfo";
+        return "contaInfo";
+    }
+    @RequestMapping(value = {"/pedidoLista"}, method = RequestMethod.GET)
+    public String pedidoLista(Model model,//
+    		@RequestParam(value = "page", defaultValue = "1")String pageStr) {
+    	
+    	int page = 1;
+    	
+    	try {
+			page = Integer.parseInt(pageStr);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+			final int MAX_RESULT = 5;
+			final int MAX_NAVIGATION_PAGE = 10;
+			
+			PaginationResult<PedidoInfo> paginationResult//
+			= pedidoDAO.listaPedidoInfo(page, MAX_RESULT, MAX_NAVIGATION_PAGE);
+			
+			model.addAttribute("paginationResult", paginationResult);
+			return "pedidoLista";
+    
     }
 	
 	  // GET: Show product.
@@ -115,6 +147,24 @@ public class AdminController {
  
         }
         return "redirect:/listaProduto";
+    }
+    @RequestMapping(value = {"/pedido"}, method = RequestMethod.GET)
+    public String pedidoMostrar(Model model, @RequestParam ("pedidoID") String pedidoId) {
+    	
+    	PedidoInfo pedidoInfo = null;
+    	
+    	if (pedidoId != null) {
+			pedidoInfo = this.pedidoDAO.getPedidoInfo(pedidoId);
+		}
+    	if (pedidoInfo == null) {
+			return "redirect:/pedidoLista";
+		}
+    	List<PedidoDetalheInfo> detalhes = this.pedidoDAO.listarInformacoesDetalhesPedido(pedidoId);
+    	pedidoInfo.setDetalhes(detalhes);
+    	
+    	model.addAttribute("pedidoInfo", pedidoInfo);
+    	
+    	return "pedido";
     }
 
 }
