@@ -34,9 +34,7 @@ import br.com.java.model.ProdutoInfo;
 import br.com.java.validator.ProdutoInfoValidator;
 
 @Controller
-//Enable Hibernate Transaction.
 @Transactional 
-//Need to use RedirectAttributes
 @EnableWebMvc
 public class AdminController {
 	
@@ -49,7 +47,6 @@ public class AdminController {
 	@Autowired
 	private ProdutoInfoValidator produtoInfoValidator;
 	
-	// Configurated In ApplicationContextConfig.
     @Autowired
     private ResourceBundleMessageSource messageSource;
  
@@ -107,7 +104,6 @@ public class AdminController {
     
     }
 	
-	  // GET: Show product.
     @RequestMapping(value = { "/produto" }, method = RequestMethod.GET)
     public String produto(Model model, @RequestParam(value = "codigo", defaultValue = "") String codigo) {
 		ProdutoInfo produtoInfo = null;

@@ -34,9 +34,7 @@ import br.com.java.util.Utils;
 import br.com.java.validator.ClienteInfoValidator;
 
 @Controller
-//Enable Hibernate Transaction.
 @Transactional
-//Need to use RedirectAttributes
 @EnableWebMvc
 public class MainController {
 	
@@ -57,14 +55,10 @@ public class MainController {
 		}
 		System.out.println("Target=" + target);
 
-		// For Cart Form.
-		// (@ModelAttribute("cartForm") @Validated CartInfo cartForm)
 		if (target.getClass() == CarrinhoInfo.class) {
 
 		}
-		// For Customer Form.
-		// (@ModelAttribute("customerForm") @Validated CustomerInfo
-		// customerForm)
+
 		else if (target.getClass() == ClienteInfo.class) {
 			dataBinder.setValidator(clienteInfoValidator);
 		}
@@ -244,5 +238,4 @@ public class MainController {
 		        }
 		        response.getOutputStream().close();
 		    }
-
 }
