@@ -85,7 +85,7 @@ public class PedidoDAOImpl implements PedidoDAO{
 	}
 
 	@Override
-	public PaginationResult<PedidoInfo> listOrderInfo(int page, int maxResult, int maxNavigationPage) {
+	public PaginationResult<PedidoInfo> listaPedidoInfo(int page, int maxResult, int maxNavigationPage) {
 		// TODO Auto-generated method stub
 		String sql = "Select new " + PedidoInfo.class.getName()//
 				+ "(pedido.id, pedido.pedidoData, pedido.pedidoNum, pedido.montante, "
@@ -117,7 +117,7 @@ public class PedidoDAOImpl implements PedidoDAO{
 	}
 
 	@Override
-	public List<PedidoDetalheInfo> listOrderDetailInfos(String pedidoId) {
+	public List<PedidoDetalheInfo> listarInformacoesDetalhesPedido(String pedidoId) {
 		// TODO Auto-generated method stub
 		String sql = "Select new " + PedidoDetalheInfo.class.getName() //
 				+ "(d.id, d.produto.codigo, d.produto.nome , d.quantidade,d.preco,d.montante) "//
