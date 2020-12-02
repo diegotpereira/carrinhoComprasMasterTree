@@ -94,7 +94,7 @@ public class PedidoDAOImpl implements PedidoDAO{
 				+ " order by pedido.pedidoNum desc";
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query = session.createQuery(sql);
-		return new PaginationResult<OrderInfo>(query, page, maxResult, maxNavigationPage);
+		return new PaginationResult<PedidoInfo>(query, page, maxResult, maxNavigationPage);
 	}
 	
 	public Pedido descPedido(String pedidoId) {
