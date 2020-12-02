@@ -16,7 +16,7 @@
    <jsp:include page="_header.jsp" />
    <jsp:include page="_menu.jsp" />
  
-   <div class="page-title">Carrinho de Compras Demo</div>
+   <div class="page-title">Aplicação Carrinho de Compras</div>
   
    <div class="demo-container">
    <h3>Conteúdo da Aplicação</h3>

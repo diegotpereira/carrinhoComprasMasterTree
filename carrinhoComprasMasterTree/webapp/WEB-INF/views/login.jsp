@@ -20,17 +20,17 @@
  
  
  
-   <div class="page-title">Login (Para Funcionário, Gerente)</div>
+   <div class="page-title">Login (Funcionário ou Gerente)</div>
  
    <div class="login-container">
  
-       <h3>Digite o nome de usuário e a senha</h3>
+       <h3>Digite seu nome de usuário e a senha</h3>
        <br>
        <!-- /login?error=true -->
        <c:if test="${param.error == 'true'}">
            <div style="color: red; margin: 10px 0px;">
  
-               Login Failed!!!<br /> Reason :
+               Falha na autenticação!!!<br /> Razão :
                ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
  
            </div>

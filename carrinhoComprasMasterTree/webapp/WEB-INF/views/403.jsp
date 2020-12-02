@@ -16,9 +16,9 @@
    <jsp:include page="_header.jsp" />
    <jsp:include page="_menu.jsp" />
  
-   <div class="page-title">Access Denied!</div>
+   <div class="page-title">Acesso negado!</div>
   
-   <h3 style="color:red;">Sorry, you can not access this page!</h3>
+   <h3 style="color:red;">Desculpe, você não pode acessar está página!</h3>
   
   
    <jsp:include page="_footer.jsp" />
