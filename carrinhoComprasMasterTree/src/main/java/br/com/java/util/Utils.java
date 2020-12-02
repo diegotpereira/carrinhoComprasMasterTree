@@ -1,4 +1,4 @@
-package b.com.java.util;
+package br.com.java.util;
 
 import javax.servlet.http.HttpServletRequest;
 
