@@ -40,7 +40,7 @@ import br.com.java.validator.ClienteInfoValidator;
 @EnableWebMvc
 public class MainController {
 	
-	@Autowired
+//	@Autowired
 	public PedidoDAO pedidoDAO;
 	
 	@Autowired
