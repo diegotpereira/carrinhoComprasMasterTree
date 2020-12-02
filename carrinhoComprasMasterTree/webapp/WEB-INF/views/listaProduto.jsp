@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Product List</title>
+<title>Lista de Produtos</title>
  
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css">
  

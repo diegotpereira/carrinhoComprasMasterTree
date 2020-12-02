@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
  
-<title>Account Info</title>
+<title>Informação de Conta</title>
  
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css">
  
