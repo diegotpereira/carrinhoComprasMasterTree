@@ -19,33 +19,33 @@
  
    <fmt:setLocale value="en_US" scope="session"/>
   
-   <div class="page-title">Order List</div>
+   <div class="page-title">Lista de Pedidos</div>
  
-   <div>Total Order Count: ${paginationResult.totalRecords}</div>
+   <div>Contagem total do pedidos: ${paginationResult.totalRecords}</div>
   
    <table border="1" style="width:100%">
        <tr>
-           <th>Order Num</th>
-           <th>Order Date</th>
-           <th>Customer Name</th>
-           <th>Customer Address</th>
-           <th>Customer Email</th>
-           <th>Amount</th>
-           <th>View</th>
+           <th>Pedido Numero</th>
+           <th>Pedido Data</th>
+           <th>Cliente Nome</th>
+           <th>Cliente Endereço</th>
+           <th>Cliente Email</th>
+           <th>Montante</th>
+           <th>Mostrar</th>
        </tr>
-       <c:forEach items="${paginationResult.list}" var="orderInfo">
+       <c:forEach items="${paginationResult.list}" var="pedidoInfo">
            <tr>
                <td>${orderInfo.orderNum}</td>
                <td>
                   <fmt:formatDate value="${orderInfo.orderDate}" pattern="dd-MM-yyyy HH:mm"/>
                </td>
-               <td>${orderInfo.customerName}</td>
-               <td>${orderInfo.customerAddress}</td>
-               <td>${orderInfo.customerEmail}</td>
+               <td>${pedidoInfo.clienteNome}</td>
+               <td>${pedidoInfo.clienteEndereco}</td>
+               <td>${pedidoInfo.clienteEmail}</td>
                <td style="color:red;">
-                  <fmt:formatNumber value="${orderInfo.amount}" type="currency"/>
+                  <fmt:formatNumber value="${pedidoInfo.montante}" type="currency"/>
                </td>
-               <td><a href="${pageContext.request.contextPath}/order?orderId=${orderInfo.id}">
+               <td><a href="${pageContext.request.contextPath}/order?orderId=${pedidoInfo.id}">
                   View</a></td>
            </tr>
        </c:forEach>

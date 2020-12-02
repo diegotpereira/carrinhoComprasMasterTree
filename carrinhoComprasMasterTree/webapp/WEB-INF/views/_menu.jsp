@@ -17,7 +17,7 @@
    </a>
    |
    <security:authorize  access="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
-     <a href="${pageContext.request.contextPath}/orderList">
+     <a href="${pageContext.request.contextPath}/pedidoLista">
          Lista de Pedidos
      </a>
      |

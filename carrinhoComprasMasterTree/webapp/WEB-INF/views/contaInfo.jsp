@@ -20,7 +20,7 @@
    <jsp:include page="_header.jsp" />
    <jsp:include page="_menu.jsp" />
  
-   <div class="page-title">Account Info</div>
+   <div class="page-title">Informação da Conta</div>
  
    <div class="account-container">
  

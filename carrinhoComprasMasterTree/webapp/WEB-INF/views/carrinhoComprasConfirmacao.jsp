@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
  
-<title>Shopping Cart Confirmation</title>
+<title>Confirmação do Carrinho Compras</title>
  
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css">
  
@@ -20,39 +20,38 @@
  
   <fmt:setLocale value="en_US" scope="session"/>
  
-  <div class="page-title">Confirmation</div>
+  <div class="page-title">Confirmação</div>
  
  
  
   <div class="customer-info-container">
-      <h3>Customer Information:</h3>
+      <h3>Informação do Cliente:</h3>
       <ul>
-          <li>Name: ${myCart.customerInfo.name}</li>
-          <li>Email: ${myCart.customerInfo.email}</li>
-          <li>Phone: ${myCart.customerInfo.phone}</li>
-          <li>Address: ${myCart.customerInfo.address}</li>
+          <li>Nome: ${meuCarrinho.clienteInfo.nome}</li>
+          <li>Email: ${meuCarrinho.clienteInfo.email}</li>
+          <li>Telefone: ${meuCarrinho.clienteInfo.telefone}</li>
+          <li>Endereço: ${meuCarrinho.clienteInfo.endereco}</li>
       </ul>
-      <h3>Cart Summary:</h3>
+      <h3>Resumo do Carrinho:</h3>
       <ul>
-          <li>Quantity: ${myCart.quantityTotal}</li>
+          <li>Quantidade: ${meuCarrinho.quantidadeTotal}</li>
           <li>Total:
           <span class="total">
-            <fmt:formatNumber value="${myCart.amountTotal}" type="currency"/>
+            <fmt:formatNumber value="${meuCarrinho.montanteTotal}" type="currency"/>
           </span></li>
       </ul>
   </div>
  
   <form method="POST"
-      action="${pageContext.request.contextPath}/shoppingCartConfirmation">
+      action="${pageContext.request.contextPath}/carrinhoComprasConfirmacao">
  
       <!-- Edit Cart -->
       <a class="navi-item"
-          href="${pageContext.request.contextPath}/shoppingCart">Edit Cart</a>
+          href="${pageContext.request.contextPath}/carrinhoCompras">Editar Carrinho</a>
  
       <!-- Edit Customer Info -->
       <a class="navi-item"
-          href="${pageContext.request.contextPath}/shoppingCartCustomer">Edit
-          Customer Info</a>
+          href="${pageContext.request.contextPath}/carrinhoComprasCliente">Editar Informação do Cliente</a>
  
       <!-- Send/Save -->
       <input type="submit" value="Send" class="button-send-sc" />
@@ -60,23 +59,23 @@
  
   <div class="container">
  
-      <c:forEach items="${myCart.cartLines}" var="cartLineInfo">
+      <c:forEach items="${meuCarrinho.carrinhoLinhas}" var="CarrinhoLinhaInfo">
           <div class="product-preview-container">
               <ul>
                   <li><img class="product-image"
-                      src="${pageContext.request.contextPath}/productImage?code=${cartLineInfo.productInfo.code}" /></li>
-                  <li>Code: ${cartLineInfo.productInfo.code} <input
-                      type="hidden" name="code" value="${cartLineInfo.productInfo.code}" />
+                      src="${pageContext.request.contextPath}/produtoImage?code=${carrinhoLinhaInfo.produtoInfo.codigo}" /></li>
+                  <li>Code: ${carrinhoLinhaInfo.produtoInfo.codigo} <input
+                      type="hidden" name="code" value="${carrinhoLinhaInfo.produtoInfo.codigo}" />
                   </li>
-                  <li>Name: ${cartLineInfo.productInfo.name}</li>
-                  <li>Price: <span class="price">
-                     <fmt:formatNumber value="${cartLineInfo.productInfo.price}" type="currency"/>
+                  <li>Nome: ${carrinhoLinhaInfo.produtoInfo.nome}</li>
+                  <li>Preço: <span class="preco">
+                     <fmt:formatNumber value="${carrinhoLinhaInfo.produtoInfo.preco}" type="currency"/>
                   </span>
                   </li>
-                  <li>Quantity: ${cartLineInfo.quantity}</li>
+                  <li>Quantidade: ${carrinhoLinhaInfo.quantidade}</li>
                   <li>Subtotal:
                     <span class="subtotal">
-                       <fmt:formatNumber value="${cartLineInfo.amount}" type="currency"/>
+                       <fmt:formatNumber value="${carrinhoLinhaInfo.montante}" type="currency"/>
                     </span>
                   </li>
               </ul>

@@ -17,11 +17,11 @@
  
    <jsp:include page="_menu.jsp" />
  
-   <div class="page-title">Finalize</div>
+   <div class="page-title">Finalizar</div>
   
    <div class="container">
-       <h3>Thank you for Order</h3>
-       Your order number is: ${lastOrderedCart.orderNum}
+       <h3>Obrigado pelo pedido</h3>
+       O número do seu pedido é: ${ultimoCarrinhoPedido.pedidoNum}
    </div>
  
    <jsp:include page="_footer.jsp" />

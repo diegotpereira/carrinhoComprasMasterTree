@@ -18,16 +18,16 @@
 <jsp:include page="_header.jsp" />
 <jsp:include page="_menu.jsp" />
  
-<div class="page-title">Enter Customer Information</div>
+<div class="page-title">Entre Com Informação do Cliente</div>
  
-   <form:form method="POST" modelAttribute="customerForm"
-       action="${pageContext.request.contextPath}/shoppingCartCustomer">
+   <form:form method="POST" modelAttribute="clienteForm"
+       action="${pageContext.request.contextPath}/carrinhoComprasCliente">
  
        <table>
            <tr>
-               <td>Name *</td>
-               <td><form:input path="name" /></td>
-               <td><form:errors path="name" class="error-message" /></td>
+               <td>Nome *</td>
+               <td><form:input path="nome" /></td>
+               <td><form:errors path="nome" class="error-message" /></td>
            </tr>
  
            <tr>
@@ -37,15 +37,15 @@
            </tr>
  
            <tr>
-               <td>Phone *</td>
-               <td><form:input path="phone" /></td>
-               <td><form:errors path="phone" class="error-message" /></td>
+               <td>Telefone *</td>
+               <td><form:input path="telefone" /></td>
+               <td><form:errors path="telefone" class="error-message" /></td>
            </tr>
  
            <tr>
-               <td>Address *</td>
-               <td><form:input path="address" /></td>
-               <td><form:errors path="address" class="error-message" /></td>
+               <td>Endereço *</td>
+               <td><form:input path="endereco" /></td>
+               <td><form:errors path="endereco" class="error-message" /></td>
            </tr>
  
            <tr>

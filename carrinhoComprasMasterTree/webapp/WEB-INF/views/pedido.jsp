@@ -19,21 +19,21 @@
     
    <fmt:setLocale value="en_US" scope="session"/>
  
-   <div class="page-title">Order Info</div>
+   <div class="page-title">Informação de Pedido</div>
  
    <div class="customer-info-container">
-       <h3>Customer Information:</h3>
+       <h3>Informação do Cliente:</h3>
        <ul>
-           <li>Name: ${orderInfo.customerName}</li>
-           <li>Email: ${orderInfo.customerEmail}</li>
-           <li>Phone: ${orderInfo.customerPhone}</li>
-           <li>Address: ${orderInfo.customerAddress}</li>
+           <li>Nome: ${pedidoInfo.clienteNome}</li>
+           <li>Email: ${pedidoInfo.clienteEmail}</li>
+           <li>Telefone: ${pedidoInfo.clienteTelefone}</li>
+           <li>Endereço: ${pedidoInfo.clienteEndereco}</li>
        </ul>
-       <h3>Order Summary:</h3>
+       <h3>Resumo do Pedido:</h3>
        <ul>
            <li>Total:
            <span class="total">
-           <fmt:formatNumber value="${orderInfo.amount}" type="currency"/>
+           <fmt:formatNumber value="${pedidoInfo.montante}" type="currency"/>
            </span></li>
        </ul>
    </div>
@@ -42,22 +42,22 @@
     
    <table border="1" style="width:100%">
        <tr>
-           <th>Product Code</th>
-           <th>Product Name</th>
-           <th>Quantity</th>
-           <th>Price</th>
-           <th>Amount</th>
+           <th>Produto Código</th>
+           <th>Produto Nome</th>
+           <th>Quantidade</th>
+           <th>Preço</th>
+           <th>Montante</th>
        </tr>
-       <c:forEach items="${orderInfo.details}" var="orderDetailInfo">
+       <c:forEach items="${pedidoInfo.detalhe}" var="pedidoDetalheInfo">
            <tr>
-               <td>${orderDetailInfo.productCode}</td>
-               <td>${orderDetailInfo.productName}</td>
-               <td>${orderDetailInfo.quanity}</td>
+               <td>${pedidoDetalheInfo.produtoCodigo}</td>
+               <td>${pedidoDetalheInfo.produtoNome}</td>
+               <td>${pedidoDetalheInfo.quantidade}</td>
                <td>
-                <fmt:formatNumber value="${orderDetailInfo.price}" type="currency"/>
+                <fmt:formatNumber value="${pedidoDetalheInfo.preco}" type="currency"/>
                </td>
                <td>
-                <fmt:formatNumber value="${orderDetailInfo.amount}" type="currency"/>
+                <fmt:formatNumber value="${pedidoDetalheInfo.montante}" type="currency"/>
                </td>  
            </tr>
        </c:forEach>

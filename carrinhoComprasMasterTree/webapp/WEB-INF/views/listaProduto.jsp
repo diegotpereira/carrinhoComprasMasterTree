@@ -30,9 +30,9 @@
            <ul>
                <li><img class="product-image"
                    src="${pageContext.request.contextPath}/produtoImage?codigo=${prodInfo.codigo}" /></li>
-               <li>Code: ${prodInfo.codigo}</li>
-               <li>Name: ${prodInfo.nome}</li>
-               <li>Price: <fmt:formatNumber value="${prodInfo.preco}" type="currency"/></li>
+               <li>Codigo: ${prodInfo.codigo}</li>
+               <li>Nome: ${prodInfo.nome}</li>
+               <li>Preço: <fmt:formatNumber value="${prodInfo.preco}" type="currency"/></li>
                <li><a
                    href="${pageContext.request.contextPath}/buyProduct?codigo=${prodInfo.codigo}">
                        Buy Now</a></li>
@@ -40,7 +40,7 @@
                <security:authorize  access="hasRole('ROLE_MANAGER')">
                  <li><a style="color:red;"
                      href="${pageContext.request.contextPath}/produto?codigo=${prodInfo.codigo}">
-                       Edit Product</a></li>
+                       Editar Produto</a></li>
                </security:authorize>
            </ul>
        </div>
