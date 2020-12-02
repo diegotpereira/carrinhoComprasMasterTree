@@ -105,7 +105,6 @@ public class PedidoDAOImpl implements PedidoDAO{
 			session = sessionFactory.openSession();
 		}
 		Query query = session.createQuery(sql);
-//		return new PaginationResult<PedidoInfo>(query, page, maxResult, maxNavigationPage);
 		return new PaginationResult<PedidoInfo>(query, page, maxResult, maxNavigationPage);
 	}
 	
@@ -136,7 +135,16 @@ public class PedidoDAOImpl implements PedidoDAO{
 				+ " from " + PedidoDetalhe.class.getName() + " d "//
 				+ " where d.pedido.id = :pedidoId ";
 		
-		Session session = this.sessionFactory.getCurrentSession();
+//		Session session = this.sessionFactory.getCurrentSession();
+		Session session;
+
+		try {
+			// Step-2: Implementation
+			session = sessionFactory.getCurrentSession();
+		} catch (HibernateException e) {
+			// Step-3: Implementation
+			session = sessionFactory.openSession();
+		}
 		
 		Query query = session.createQuery(sql);
         query.setParameter("pedidoId", pedidoId);
