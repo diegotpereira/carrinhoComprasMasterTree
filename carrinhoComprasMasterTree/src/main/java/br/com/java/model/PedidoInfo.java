@@ -16,6 +16,8 @@ public class PedidoInfo {
 	
 	private List<PedidoDetalheInfo> detalhes;
 	
+	public PedidoInfo() {}
+	
 	public PedidoInfo(String id, Date pedidoData, int pedidoNum, double montante, //
 			String clienteNome,String clienteEndereco, String clienteEmail, String clienteTelefone) {
 		this.id = id;

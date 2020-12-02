@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.Criteria;
-
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.hibernate.Query;
 import br.com.java.entity.Pedido;
 import br.com.java.entity.PedidoDetalhe;
 import br.com.java.entity.Produto;
@@ -21,6 +21,7 @@ import br.com.java.model.ClienteInfo;
 import br.com.java.model.PaginationResult;
 import br.com.java.model.PedidoDetalheInfo;
 import br.com.java.model.PedidoInfo;
+import br.com.java.model.ProdutoInfo;
 
 @Transactional
 public class PedidoDAOImpl implements PedidoDAO{
@@ -90,10 +91,21 @@ public class PedidoDAOImpl implements PedidoDAO{
 		String sql = "Select new " + PedidoInfo.class.getName()//
 				+ "(pedido.id, pedido.pedidoData, pedido.pedidoNum, pedido.montante, "
 				+ " pedido.clienteNome, pedido.clienteEndereco, pedido.clienteEmail, pedido.clienteTelefone) " + " from "
-				+ Pedido.class.getName() + " ord "//
+				+ Pedido.class.getName() + " pedido "//
 				+ " order by pedido.pedidoNum desc";
-		Session session = this.sessionFactory.getCurrentSession();
+//		Session session = this.sessionFactory.getCurrentSession();
+		
+		Session session;
+
+		try {
+			// Step-2: Implementation
+			session = sessionFactory.getCurrentSession();
+		} catch (HibernateException e) {
+			// Step-3: Implementation
+			session = sessionFactory.openSession();
+		}
 		Query query = session.createQuery(sql);
+//		return new PaginationResult<PedidoInfo>(query, page, maxResult, maxNavigationPage);
 		return new PaginationResult<PedidoInfo>(query, page, maxResult, maxNavigationPage);
 	}
 	

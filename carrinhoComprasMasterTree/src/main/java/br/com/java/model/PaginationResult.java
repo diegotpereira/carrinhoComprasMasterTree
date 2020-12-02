@@ -21,7 +21,7 @@ public class PaginationResult <E>{
 
 	// @page: 1, 2, ..
 	public PaginationResult(org.hibernate.Query query, int page, int maxResult, int maxNavigationPage) {
-		final int pageIndex = page - 1 < 0 ? 0 : page - 1;
+		final int pageIndex = page - 1 < 0 ? 0 : page - 1;	
 
 		int fromRecordIndex = pageIndex * maxResult;
 		int maxRecordIndex = fromRecordIndex + maxResult;

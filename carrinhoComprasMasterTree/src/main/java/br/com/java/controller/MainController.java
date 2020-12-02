@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import b.com.java.util.Utils;
 import br.com.java.dao.PedidoDAO;
 import br.com.java.dao.ProdutoDAO;
 import br.com.java.entity.Produto;
@@ -31,6 +30,7 @@ import br.com.java.model.CarrinhoInfo;
 import br.com.java.model.ClienteInfo;
 import br.com.java.model.PaginationResult;
 import br.com.java.model.ProdutoInfo;
+import br.com.java.util.Utils;
 import br.com.java.validator.ClienteInfoValidator;
 
 @Controller
@@ -40,7 +40,7 @@ import br.com.java.validator.ClienteInfoValidator;
 @EnableWebMvc
 public class MainController {
 	
-//	@Autowired
+	@Autowired
 	public PedidoDAO pedidoDAO;
 	
 	@Autowired

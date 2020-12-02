@@ -23,6 +23,8 @@ import org.springframework.web.servlet.view.JstlView;
 
 import br.com.java.dao.ContaDAO;
 import br.com.java.dao.ContaDAOImpl;
+import br.com.java.dao.PedidoDAO;
+import br.com.java.dao.PedidoDAOImpl;
 import br.com.java.dao.ProdutoDAO;
 import br.com.java.dao.ProdutoDAOImpl;
 
@@ -123,6 +125,10 @@ public class AppWebConfiguration {
 	@Bean(name = "produtoDAO")
     public ProdutoDAO getProdutoDAO() {
         return new ProdutoDAOImpl();
+    }
+	@Bean(name = "pedidoDAO")
+    public PedidoDAO getPedidoDAO() {
+        return new PedidoDAOImpl();
     }
 
 }

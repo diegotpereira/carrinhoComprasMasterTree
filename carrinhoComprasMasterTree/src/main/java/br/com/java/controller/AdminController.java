@@ -40,7 +40,7 @@ import br.com.java.validator.ProdutoInfoValidator;
 @EnableWebMvc
 public class AdminController {
 	
-//	@Autowired
+	@Autowired
 	private PedidoDAO pedidoDAO;
 	
 	@Autowired
@@ -100,8 +100,7 @@ public class AdminController {
 			final int MAX_RESULT = 5;
 			final int MAX_NAVIGATION_PAGE = 10;
 			
-			PaginationResult<PedidoInfo> paginationResult//
-			= pedidoDAO.listaPedidoInfo(page, MAX_RESULT, MAX_NAVIGATION_PAGE);
+			PaginationResult<PedidoInfo> paginationResult = pedidoDAO.listaPedidoInfo(page, MAX_RESULT, MAX_NAVIGATION_PAGE);
 			
 			model.addAttribute("paginationResult", paginationResult);
 			return "pedidoLista";
