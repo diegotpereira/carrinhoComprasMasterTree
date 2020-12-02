@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Product List</title>
+<title>Lista de Pedidos</title>
  
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css">
  
@@ -21,7 +21,7 @@
   
    <div class="page-title">Lista de Pedidos</div>
  
-   <div>Contagem total do pedidos: ${paginationResult.totalRecords}</div>
+   <div>Contagem total de pedidos: ${paginationResult.totalRecords}</div>
   
    <table border="1" style="width:100%">
        <tr>

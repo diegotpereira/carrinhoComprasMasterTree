@@ -37,9 +37,9 @@
                <div class="product-preview-container">
                    <ul>
                        <li><img class="product-image"
-                           src="${pageContext.request.contextPath}/produtoImage?code=${CarrinhoLinhaInfo.produtoInfo.codigo}" />
+                           src="${pageContext.request.contextPath}/produtoImage?codigo=${CarrinhoLinhaInfo.produtoInfo.codigo}" />
                        </li>
-                       <li>Code: ${CarrinhoLinhaInfo.produtoInfo.codigo} <form:hidden
+                       <li>Codigo: ${CarrinhoLinhaInfo.produtoInfo.codigo} <form:hidden
                                path="carrinhoLinhas[${varStatus.index}].produtoInfo.codigo" />
  
                        </li>
@@ -59,7 +59,7 @@
                          </span>
                        </li>
                        <li><a
-                           href="${pageContext.request.contextPath}/shoppingCartRemoveProduct?code=${CarrinhoLinhaInfo.produtoInfo.codigo}">
+                           href="${pageContext.request.contextPath}/carrinhodeComprasRemoverProduto?codigo=${CarrinhoLinhaInfo.produtoInfo.codigo}">
                                Deletar </a></li>
                    </ul>
                </div>

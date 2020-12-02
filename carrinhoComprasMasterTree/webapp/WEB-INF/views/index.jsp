@@ -19,11 +19,11 @@
    <div class="page-title">Carrinho de Compras Demo</div>
   
    <div class="demo-container">
-   <h3>Demo content</h3>
+   <h3>Conteúdo da Aplicação</h3>
   
    <ul>
       <li>Venda online</li>
-      <li>Páginas de administração</li>
+      <li>Página de administração</li>
       <li>Relatórios</li>
    </ul>
    </div>

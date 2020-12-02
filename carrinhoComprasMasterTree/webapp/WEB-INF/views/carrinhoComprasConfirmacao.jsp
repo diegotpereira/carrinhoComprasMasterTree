@@ -54,7 +54,7 @@
           href="${pageContext.request.contextPath}/carrinhoComprasCliente">Editar Informação do Cliente</a>
  
       <!-- Send/Save -->
-      <input type="submit" value="Send" class="button-send-sc" />
+      <input type="submit" value="Enviar" class="button-send-sc" />
   </form>
  
   <div class="container">
@@ -63,9 +63,9 @@
           <div class="product-preview-container">
               <ul>
                   <li><img class="product-image"
-                      src="${pageContext.request.contextPath}/produtoImage?code=${carrinhoLinhaInfo.produtoInfo.codigo}" /></li>
-                  <li>Code: ${carrinhoLinhaInfo.produtoInfo.codigo} <input
-                      type="hidden" name="code" value="${carrinhoLinhaInfo.produtoInfo.codigo}" />
+                      src="${pageContext.request.contextPath}/produtoImage?codigo=${carrinhoLinhaInfo.produtoInfo.codigo}" /></li>
+                  <li>Codigo: ${carrinhoLinhaInfo.produtoInfo.codigo} <input
+                      type="hidden" name="codigo" value="${carrinhoLinhaInfo.produtoInfo.codigo}" />
                   </li>
                   <li>Nome: ${carrinhoLinhaInfo.produtoInfo.nome}</li>
                   <li>Preço: <span class="preco">
