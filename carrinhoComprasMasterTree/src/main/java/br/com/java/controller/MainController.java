@@ -9,14 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import b.com.java.util.Utils;
 import br.com.java.dao.PedidoDAO;
@@ -77,7 +82,7 @@ public class MainController {
 	}
 	
 	@RequestMapping({ "/listaProduto" })
-    public String listProductHandler(Model model, //
+    public String listaProdutoVenda(Model model, //
             @RequestParam(value = "name", defaultValue = "") String likeName,
             @RequestParam(value = "page", defaultValue = "1") int page) {
         final int maxResult = 5;
@@ -91,7 +96,7 @@ public class MainController {
         return "listaProduto";
     }
 	@RequestMapping({"/comprarProduto"})
-	public String listaProdutoVenda(HttpServletRequest request, Model model,//
+	public String listaProdutoCompra(HttpServletRequest request, Model model,//
 			@RequestParam(value="codigo", defaultValue ="")String codigo) {
 		
 		Produto produto = null;
@@ -107,15 +112,124 @@ public class MainController {
 		}
 		return "redirect:/carrinhoCompras";
 	}
+	@RequestMapping({"/carrinhodeComprasRemoverProduto"})
+	public String removerProdutoVenda(HttpServletRequest request, Model model,//
+			@RequestParam(value= "codigo", defaultValue ="")String codigo) {
+		Produto produto = null;
+		if (codigo != null && codigo.length()>0) {
+			produto = produtoDAO.descProduto(codigo);
+		}
+		if (produto !=null) {
+			CarrinhoInfo carrinhoInfo = Utils.getCarrinhoInSession(request);
+			
+			ProdutoInfo produtoInfo = new ProdutoInfo();
+			
+			carrinhoInfo.removerProduto(produtoInfo);
+		}
+		return  "redirect:/carrinhoCompras";
+	}
+	
+	@RequestMapping(value= {"/carrinhoCompras"}, method = RequestMethod.POST)
+	public String carrinhoComprasAtualizarQtd(HttpServletRequest request,//
+			Model model,//
+	@ModelAttribute("carrinhoForm") CarrinhoInfo carrinhoForm){
+		
+		CarrinhoInfo carrinhoInfo = Utils.getCarrinhoInSession(request);
+		carrinhoInfo.alterarQuantidade(carrinhoForm);
+		
+		return "redirect:/carrinhoCompras";
+	}
+	@RequestMapping(value= {"/carrinhoCompras"}, method = RequestMethod.GET)
+	public String carrinhoComprasShow(HttpServletRequest request, Model model) {
+		CarrinhoInfo meuCarrinho = Utils.getCarrinhoInSession(request);
+		
+		model.addAttribute("carrinhoForm", meuCarrinho);
+		return "carrinhoCompras";
+	}
 	
 	
-	  @RequestMapping(value = { "/carrinhoCompras" }, method = RequestMethod.GET)
-	    public String shoppingCartHandler(HttpServletRequest request, Model model) {
-//	        CartInfo myCart = Utils.getCartInSession(request);
-	 
-//	        model.addAttribute("cartForm", myCart);
-	        return "carrinhoCompras";
-	    }
+	
+	  @RequestMapping(value = { "/carrinhoComprasCliente" }, method = RequestMethod.GET)
+	    public String carrinhoComprasClienteForm(HttpServletRequest request, Model model) {
+		  
+		  CarrinhoInfo carrinhoInfo = Utils.getCarrinhoInSession(request);
+		  
+		  if (carrinhoInfo.isEmpty()) {
+			return "redirect:/carrinhoCompras";
+		}
+		  
+		  ClienteInfo clienteInfo = carrinhoInfo.getClienteInfo();	
+		  
+		  if (clienteInfo == null) {
+			clienteInfo = new ClienteInfo();
+		}
+		  model.addAttribute("clienteForm", clienteInfo);
+		  return "carrinhoComprasCliente";
+	  }
+	  @RequestMapping(value= {"/carrinhoComprasCliente"}, method = RequestMethod.POST)
+	  public String carrinhoComprasClienteSalvar(HttpServletRequest request,//
+			  Model model,//
+			  @ModelAttribute("clienteForm")@Validated ClienteInfo clienteForm,//
+			  BindingResult result,//
+			  final RedirectAttributes redirectAttributes) {
+		  
+		  if (result.hasErrors()) {
+			clienteForm.setValida(false);
+			
+			return "carrinhoComprasCliente";
+		}
+		  
+		  clienteForm.setValida(true);
+		  CarrinhoInfo carrinhoInfo = Utils.getCarrinhoInSession(request);
+		  
+		  carrinhoInfo.setClienteInfo(clienteForm);
+		  
+		  return "redirect:/carrinhoComprasConfirmacao";
+	  }
+	  @RequestMapping(value = {"/carrinhoComprasConfirmacao"}, method = RequestMethod.GET)
+      public String carrinhoComprasConfirmacaoRever(HttpServletRequest request, Model model) {
+    	  
+    	  CarrinhoInfo carrinhoInfo= Utils.getCarrinhoInSession(request);
+    	  
+    	  if (carrinhoInfo.isEmpty()) {
+			return "redirect:/carrinhoCompras";
+		}else if (!carrinhoInfo.isValidaCliente()) {
+			return "redirect:/carrinhoComprasCliente";
+		}
+      return "carrinhoComprasConfirmacao";
+
+      }
+      @RequestMapping(value = {"/carrinhoComprasConfirmacao"}, method = RequestMethod.POST)
+      @Transactional(propagation = Propagation.NEVER)
+      public String carrinhoComprasConfirmacaoSalvar(HttpServletRequest request, Model model) {
+    	  
+    	  CarrinhoInfo carrinhoInfo = Utils.getCarrinhoInSession(request);
+    	  
+    	  if (carrinhoInfo.isEmpty()) {
+			return "redirect:/carrinhoCompras";
+		}else if (!carrinhoInfo.isValidaCliente()) {
+			return "redirect:/carrinhoComprasCliente";
+		}
+    	  try {
+			pedidoDAO.salvarPedido(carrinhoInfo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "carrinhoComprasConfirmacao";
+		}
+    	  Utils.armazenarUltimoCarrinhoPedidoNaSessao(request, carrinhoInfo);
+    	  
+    	  return "redirect:/carrinhoComprasFinalizar";
+      
+      }
+      @RequestMapping(value= {"/carrinhoComprasFinalizar"}, method = RequestMethod.GET)
+      public String carrinhoComprasFinalizar(HttpServletRequest request, Model model) {
+    	  CarrinhoInfo ultimoCarrinhoPedido = Utils.getCarrinhoInSession(request);
+    	  
+    	  if (ultimoCarrinhoPedido ==null) {
+			return "redirect:/carrinhoCompras";
+		}
+    	  return "carrinhoComprasFinalizar";
+      }
 	  
 		  @RequestMapping(value = { "/produtoImage" }, method = RequestMethod.GET)
 		    public void produtoImagem(HttpServletRequest request, HttpServletResponse response, Model model,
