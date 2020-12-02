@@ -82,7 +82,7 @@ public class CarrinhoInfo {
 	public boolean isEmpty() {
 		return this.carrinhoLinhas.isEmpty();
 	}
-	public boolean isValidCliente() {
+	public boolean isValidaCliente() {
 		return this.clienteInfo != null && this.clienteInfo.isValida();
 	}
 	public int getQuantidadeTotal() {

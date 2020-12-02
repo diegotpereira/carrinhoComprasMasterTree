@@ -12,8 +12,8 @@ import javax.persistence.Table;
 public class Conta implements Serializable{
 	
 	private static final long serialVersionUID = -2054386655979281969L;
-	public static final String ROLE_MANAGER = "GERENTE";
-	public static final String ROLE_EMPLOYEE = "FUNCIONARIO";
+	public static final String ROLE_MANAGER = "MANAGER";
+	public static final String ROLE_EMPLOYEE = "EMPLOYEE";
 	private String userName;
 	private String password;
 	private boolean active;
