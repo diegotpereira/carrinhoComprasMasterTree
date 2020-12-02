@@ -50,7 +50,7 @@
                         
                        </span></li>
                        <li>Quantidade: <form:input
-                               path="cartLines[${varStatus.index}].quantidade" /></li>
+                               path="carrinhoLinhas[${varStatus.index}].quantidade" /></li>
                        <li>Subtotal:
                          <span class="subtotal">
                         
@@ -65,12 +65,12 @@
                </div>
            </c:forEach>
            <div style="clear: both"></div>
-           <input class="button-update-sc" type="submit" value="Update Quantity" />
+           <input class="button-update-sc" type="submit" value="Alterar Quantidade" />
            <a class="navi-item"
                href="${pageContext.request.contextPath}/carrinhoComprasCliente">Entre Com Informação do Cliente</a>
            <a class="navi-item"
                href="${pageContext.request.contextPath}/listaProduto">Continuar
-               Buy</a>
+               Compra</a>
        </form:form>
  
  

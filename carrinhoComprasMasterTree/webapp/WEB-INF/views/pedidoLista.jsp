@@ -35,9 +35,9 @@
        </tr>
        <c:forEach items="${paginationResult.list}" var="pedidoInfo">
            <tr>
-               <td>${orderInfo.orderNum}</td>
+               <td>${pedidoInfo.pedidoNum}</td>
                <td>
-                  <fmt:formatDate value="${orderInfo.orderDate}" pattern="dd-MM-yyyy HH:mm"/>
+                  <fmt:formatDate value="${pedidoInfo.pedidoData}" pattern="dd-MM-yyyy HH:mm"/>
                </td>
                <td>${pedidoInfo.clienteNome}</td>
                <td>${pedidoInfo.clienteEndereco}</td>
@@ -45,7 +45,7 @@
                <td style="color:red;">
                   <fmt:formatNumber value="${pedidoInfo.montante}" type="currency"/>
                </td>
-               <td><a href="${pageContext.request.contextPath}/order?orderId=${pedidoInfo.id}">
+               <td><a href="${pageContext.request.contextPath}/pedido?pedidoId=${pedidoInfo.id}">
                   View</a></td>
            </tr>
        </c:forEach>
@@ -54,7 +54,7 @@
        <div class="page-navigator">
           <c:forEach items="${paginationResult.navigationPages}" var = "page">
               <c:if test="${page != -1 }">
-                <a href="orderList?page=${page}" class="nav-item">${page}</a>
+                <a href="pedidoLista?page=${page}" class="nav-item">${page}</a>
               </c:if>
               <c:if test="${page == -1 }">
                 <span class="nav-item"> ... </span>

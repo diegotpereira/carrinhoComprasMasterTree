@@ -34,8 +34,8 @@
                <li>Nome: ${prodInfo.nome}</li>
                <li>Preço: <fmt:formatNumber value="${prodInfo.preco}" type="currency"/></li>
                <li><a
-                   href="${pageContext.request.contextPath}/buyProduct?codigo=${prodInfo.codigo}">
-                       Buy Now</a></li>
+                   href="${pageContext.request.contextPath}/comprarProduto?codigo=${prodInfo.codigo}">
+                       Comprar Agora</a></li>
                <!-- For Manager edit Product -->
                <security:authorize  access="hasRole('ROLE_MANAGER')">
                  <li><a style="color:red;"
