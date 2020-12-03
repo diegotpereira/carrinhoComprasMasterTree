@@ -69,8 +69,7 @@
            <a class="navi-item"
                href="${pageContext.request.contextPath}/carrinhoComprasCliente">Entre Com Informação do Cliente</a>
            <a class="navi-item"
-               href="${pageContext.request.contextPath}/listaProduto">Continuar
-               Compra</a>
+               href="${pageContext.request.contextPath}/listaProduto">Continuar Compra</a>
        </form:form>
  
  
