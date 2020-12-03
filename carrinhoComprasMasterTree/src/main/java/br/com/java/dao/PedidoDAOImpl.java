@@ -35,7 +35,16 @@ public class PedidoDAOImpl implements PedidoDAO{
 	
 	private int getMaxOrderNum() {
 		String sql = "Select max(o.pedidoNum) from " + Pedido.class.getName() + " o ";
-		Session session = sessionFactory.getCurrentSession();
+//		Session session = sessionFactory.getCurrentSession();
+		Session session;// = sessionFactory.getCurrentSession();
+
+		try {
+			// Step-2: Implementation
+			session = sessionFactory.getCurrentSession();
+		} catch (HibernateException e) {
+			// Step-3: Implementation
+			session = sessionFactory.openSession();
+		}
 		Query query = session.createQuery(sql);
 		Integer value = (Integer) query.uniqueResult();
 		if (value == null) {
@@ -47,7 +56,18 @@ public class PedidoDAOImpl implements PedidoDAO{
 	@Override
 	public void salvarPedido(CarrinhoInfo carrinhoInfo) {
 		// TODO Auto-generated method stub
-	        Session session = sessionFactory.getCurrentSession();
+//	        Session session = sessionFactory.getCurrentSession();
+		Session session;// = sessionFactory.getCurrentSession();
+
+		try {
+			// Step-2: Implementation
+			session = sessionFactory.getCurrentSession();
+		} catch (HibernateException e) {
+			// Step-3: Implementation
+			session = sessionFactory.openSession();
+		}
+
+		Transaction transaction = null;
 	     
 	        int pedidoNum = this.getMaxOrderNum() + 1;
 	        Pedido pedido = new Pedido();
@@ -62,8 +82,23 @@ public class PedidoDAOImpl implements PedidoDAO{
 	        pedido.setClienteEmail(clienteInfo.getEmail());
 	        pedido.setClienteTelefone(clienteInfo.getTelefone());
 	        pedido.setClienteEndereco(clienteInfo.getEndereco());
+	        
+	      
+			
+			try {
+				transaction = session.beginTransaction();
+				session.save(pedido);
+				transaction.commit();
+				} catch (HibernateException e) {
+				transaction.rollback();
+				e.printStackTrace();
+				} finally {
+//				session.close();
+		
+		
+				}
 	 
-	        session.persist(pedido);
+//	        session.persist(pedido);
 	 
 	        List<CarrinhoLinhaInfo> linhas = carrinhoInfo.getCarrinhoLinhas();
 	 
@@ -78,11 +113,25 @@ public class PedidoDAOImpl implements PedidoDAO{
 	            String codigo = linha.getProdutoInfo().getCodigo();
 	            Produto produto = this.produtoDAO.descProduto(codigo);
 	            detalhe.setProduto(produto);
+	            
+	        	try {
+					transaction = session.beginTransaction();
+					session.save(detalhe);
+					transaction.commit();
+					} catch (HibernateException e) {
+					transaction.rollback();
+					e.printStackTrace();
+					} finally {
+					
+			
+			
+					}
 	 
-	            session.persist(detalhe);
+//	            session.persist(detalhe);
 	            
 	        }
 	        carrinhoInfo.setPedidoNum(pedidoNum);
+	        session.close();
 		
 	}
 
