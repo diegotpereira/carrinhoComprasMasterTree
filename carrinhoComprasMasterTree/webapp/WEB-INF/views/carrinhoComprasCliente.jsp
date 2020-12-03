@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
  
-<title>Enter Customer Information</title>
+<title>Insira as informações do cliente</title>
  
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css">
  

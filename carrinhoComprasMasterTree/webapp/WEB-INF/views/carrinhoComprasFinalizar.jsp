@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
  
-<title>Shopping Cart Finalize</title>
+<title>Finalizar carrinho de compras</title>
  
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css">
  
