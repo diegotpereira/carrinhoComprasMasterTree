@@ -48,7 +48,7 @@
            <th>Preço</th>
            <th>Montante</th>
        </tr>
-       <c:forEach items="${pedidoInfo.detalhe}" var="pedidoDetalheInfo">
+       <c:forEach items="${pedidoInfo.detalhes}" var="pedidoDetalheInfo">
            <tr>
                <td>${pedidoDetalheInfo.produtoCodigo}</td>
                <td>${pedidoDetalheInfo.produtoNome}</td>

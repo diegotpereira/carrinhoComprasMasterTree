@@ -45,8 +45,7 @@
                <td style="color:red;">
                   <fmt:formatNumber value="${pedidoInfo.montante}" type="currency"/>
                </td>
-               <td><a href="${pageContext.request.contextPath}/pedido?pedidoId=${pedidoInfo.id}">
-                  View</a></td>
+               <td><a href="${pageContext.request.contextPath}/pedido?pedidoId=${pedidoInfo.id}">Ver</a></td>
            </tr>
        </c:forEach>
    </table>
