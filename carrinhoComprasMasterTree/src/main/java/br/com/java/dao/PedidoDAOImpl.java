@@ -9,6 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +47,9 @@ public class PedidoDAOImpl implements PedidoDAO{
 	@Override
 	public void salvarPedido(CarrinhoInfo carrinhoInfo) {
 		// TODO Auto-generated method stub
-	     Session session = sessionFactory.getCurrentSession();
+//	     Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("deprecation")
+		Session session = sessionFactory.getSessionFactory().openSession();
 	     
 	        int pedidoNum = this.getMaxOrderNum() + 1;
 	        Pedido pedido = new Pedido();
@@ -61,8 +64,23 @@ public class PedidoDAOImpl implements PedidoDAO{
 	        pedido.setClienteEmail(clienteInfo.getEmail());
 	        pedido.setClienteTelefone(clienteInfo.getTelefone());
 	        pedido.setClienteEndereco(clienteInfo.getEndereco());
+	        
+            Transaction transaction = null;
+			
+			try {
+				transaction = session.beginTransaction();
+				session.save(pedido);
+				transaction.commit();
+				} catch (HibernateException e) {
+				transaction.rollback();
+				e.printStackTrace();
+				} finally {
+				session.close();
+		
+		
+				}
 	 
-	        session.persist(pedido);
+//	        session.persist(pedido);
 	 
 	        List<CarrinhoLinhaInfo> linhas = carrinhoInfo.getCarrinhoLinhas();
 	 
@@ -77,8 +95,23 @@ public class PedidoDAOImpl implements PedidoDAO{
 	            String codigo = linha.getProdutoInfo().getCodigo();
 	            Produto produto = this.produtoDAO.descProduto(codigo);
 	            detalhe.setProduto(produto);
+	            
+//	            Transaction transaction = null;
+				
+				try {
+					transaction = session.beginTransaction();
+					session.save(detalhe);
+					transaction.commit();
+					} catch (HibernateException e) {
+					transaction.rollback();
+					e.printStackTrace();
+					} finally {
+					session.close();
+			
+			
+					}
 	 
-	            session.persist(detalhe);
+//	            session.persist(detalhe);
 	            
 	        }
 	        carrinhoInfo.setPedidoNum(pedidoNum);
