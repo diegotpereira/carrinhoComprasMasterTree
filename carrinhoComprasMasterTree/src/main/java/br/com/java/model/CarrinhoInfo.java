@@ -61,15 +61,17 @@ public class CarrinhoInfo {
 	}
 	public void validate() {}
 	
+//	@SuppressWarnings("null")
 	public void alterarProduto(String codigo, int quantidade) {
 		CarrinhoLinhaInfo linha = this.encontrarLinhaPorCodigo(codigo);
 		
 		if (linha != null) {
-			if (quantidade <= 0) {
-				this.carrinhoLinhas.remove(linha);
+			if (quantidade >= 0) {
+				linha.setQuantidade(quantidade);
+				
 			}
 		} else {
-			linha.setQuantidade(quantidade);
+			this.carrinhoLinhas.remove(linha);
 
 		}
 	}
