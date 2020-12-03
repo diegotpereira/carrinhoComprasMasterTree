@@ -159,7 +159,16 @@ public class PedidoDAOImpl implements PedidoDAO{
 	}
 	
 	public Pedido descPedido(String pedidoId) {
-		Session session = sessionFactory.getCurrentSession();
+//		Session session = sessionFactory.getCurrentSession();
+		Session session;
+
+		try {
+			// Step-2: Implementation
+			session = sessionFactory.getCurrentSession();
+		} catch (HibernateException e) {
+			// Step-3: Implementation
+			session = sessionFactory.openSession();
+		}
 		Criteria crit = session.createCriteria(Pedido.class);
 		crit.add(Restrictions.eq("id", pedidoId));
 		return (Pedido) crit.uniqueResult();

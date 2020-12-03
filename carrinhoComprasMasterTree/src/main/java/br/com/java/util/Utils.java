@@ -22,7 +22,7 @@ public class Utils {
 		request.getSession().removeAttribute("meuCarrinho");
 	}
 	public static void armazenarUltimoCarrinhoPedidoNaSessao(HttpServletRequest request, CarrinhoInfo carrinhoInfo) {
-		request.getSession().setAttribute("UltimoCarrinhoPedido", carrinhoInfo);
+		request.getSession().setAttribute("ultimoCarrinhoPedido", carrinhoInfo);
 	}
 	public static CarrinhoInfo obterUltimoCarrinhoPedidoNaSessao(HttpServletRequest request) {
 		return (CarrinhoInfo) request.getSession().getAttribute("ultimoCarrinhoPedido");

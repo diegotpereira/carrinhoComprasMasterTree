@@ -144,7 +144,7 @@ public class AdminController {
         return "redirect:/listaProduto";
     }
     @RequestMapping(value = {"/pedido"}, method = RequestMethod.GET)
-    public String pedidoMostrar(Model model, @RequestParam ("pedidoID") String pedidoId) {
+    public String pedidoMostrar(Model model, @RequestParam ("pedidoId") String pedidoId) {
     	
     	PedidoInfo pedidoInfo = null;
     	
