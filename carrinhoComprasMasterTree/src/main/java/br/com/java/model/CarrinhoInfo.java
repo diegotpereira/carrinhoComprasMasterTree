@@ -31,9 +31,10 @@ public class CarrinhoInfo {
 	}
 
 	public List<CarrinhoLinhaInfo> getCarrinhoLinhas() {
-		return carrinhoLinhas;
+		return this.carrinhoLinhas;
 	}
 	private CarrinhoLinhaInfo encontrarLinhaPorCodigo(String codigo) {
+
 		
 		for (CarrinhoLinhaInfo linha: this.carrinhoLinhas) {
 			if (linha.getProdutoInfo().getCodigo().equals(codigo)) {
@@ -66,13 +67,14 @@ public class CarrinhoInfo {
 		CarrinhoLinhaInfo linha = this.encontrarLinhaPorCodigo(codigo);
 		
 		if (linha != null) {
-			if (quantidade >= 0) {
-				linha.setQuantidade(quantidade);
+			if (quantidade <= 0) {
+				this.carrinhoLinhas.remove(linha);
 				
-			}
+			
 		} else {
-			this.carrinhoLinhas.remove(linha);
-
+			
+			linha.setQuantidade(quantidade);	
+		}
 		}
 	}
 	public void removerProduto(ProdutoInfo produtoInfo) {
