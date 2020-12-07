@@ -116,7 +116,7 @@ public class MainController {
 		if (produto !=null) {
 			CarrinhoInfo carrinhoInfo = Utils.getCarrinhoInSession(request);
 			
-			ProdutoInfo produtoInfo = new ProdutoInfo();
+			ProdutoInfo produtoInfo = new ProdutoInfo(produto);
 			
 			carrinhoInfo.removerProduto(produtoInfo);
 		}
